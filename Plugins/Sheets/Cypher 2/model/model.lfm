@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmCypher2" formType="sheetTemplate" dataType="SavioKing.Cypher2" title="Ficha Cypher 2" align="client" theme="dark">
+    <tabControl align="client" name="pagPrincipal">
+        <tab title="Principal">
+            <import file="principal.xml"/>
+        </tab>
+        <!-- <tab title="Habilidades">
+            <import file="habilidades.xml"/>
+        </tab> -->
+        <!-- <tab title="História">
+            <import file="história.xml"/>
+        </tab> -->
+        <tab title="Anotações">
+            <richEdit align="client" defaultFontColor="white" defaultFontSize="17" backgroundColor="dimgray" field="anotacoes"/>
+        </tab>
+    </tabControl>
+    <event name="onNodeReady">        
+        if sheet.bgCustomURL ~= nil then
+            self.bgImg.src = sheet.bgCustomURL;
+            
+        else
+            self.bgImg.src = "../assets/bg/desert.jpg";
+            
+        end;
+    </event>
+</form>
