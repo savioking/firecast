@@ -15,7 +15,6 @@
         </tab>
     </tabControl>
     <event name="onNodeReady">
-        showMessage(bgCustomURL)
         if sheet.bgCustomURL ~= nil then
             self.bgImg.src = sheet.bgCustomURL;
             self.bgImgHab.src = sheet.bgCustomURL;
