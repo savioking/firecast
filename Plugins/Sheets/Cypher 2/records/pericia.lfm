@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmPericia" height="30" margins="{top=2,bottom=2}">
+	
+	<layout g="container" g-cnt-line-spacing="5" g-cnt-gutter="5" g-cnt-horz-align="left" g-cnt-vert-align="center">
+		<!-- INÍCIO: SCRIPT PARA PEGAR O POPUP -->
+		<script> 
+			<![CDATA[			
+			local function askForDelete()
+				Dialogs.confirmYesNo("Deseja realmente apagar '" .. (sheet.nomeHPericia or "<sem nome>").. "'?'",
+					function (confirmado)
+					if confirmado then
+						NDB.deleteNode(self.sheet);
+					end;
+				end);
+			end;
+
+			local function onlyOneChecked(t)
+				local inabilidade = sheet.perInabilidade or false;
+				local treinado = sheet.perTreinado or false;
+				local especializado = sheet.perEspecializado or false;
+				local expert = sheet.perExpert or false;
+
+				if t==1 and (treinado or especializado or expert) then
+					sheet.perTreinado = false;
+					sheet.perEspecializado = false;
+					sheet.perExpert = false;
+				elseif t==2 and (inabilidade or especializado or expert) then
+					sheet.perInabilidade = false;
+					sheet.perEspecializado = false;
+					sheet.perExpert = false;
+				elseif t==3 and (inabilidade or treinado or expert) then
+					sheet.perInabilidade = false;
+					sheet.perTreinado = false;
+					sheet.perExpert = false;
+				elseif t==4 and (inabilidade or treinado or especializado) then
+					sheet.perInabilidade = false;
+					sheet.perTreinado = false;
+					sheet.perEspecializado = false;
+				end;
+			end;
+			]]>
+		</script>
+		<!-- FIM: SCRIPT PARA PEGAR O POPUP -->
+	
+		<!-- INÍCIO: NOME, TIPO E ROLAGEM -->
+		<edit g="col" g-width="10" g-width-md="11" field="nomeHPericia" fontSize="18"/>
+		<imageCheckBox field="perInabilidade" g="block" width="22" height="22" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png" onChange="onlyOneChecked(1);"/>
+		<imageCheckBox field="perTreinado" g="block" width="22" height="22" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png" onChange="onlyOneChecked(2);"/>
+		<imageCheckBox field="perEspecializado" g="block" width="22" height="22" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png" onChange="onlyOneChecked(3);"/>
+		<imageCheckBox field="perExpert" g="block" width="22" height="22" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png" onChange="onlyOneChecked(4);"/>
+		<button g="col" g-width="2" g-width-md="1" text="X" g-vert-tile="true" onClick="askForDelete();"/>
+		<!-- FIM: NOME, TIPO E ROLAGEM -->
+	</layout>
+</form>

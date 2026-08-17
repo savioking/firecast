@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmHabEquip" align="client" theme="dark">
+    <image name="bgImgHab" align="client" style="autoFit"/>
+
+    <!-- POPUP HABILIDADES -->
+    <popup name="popHabilidade" width="340" height="340" backOpacity="0.4" autoScopeNode="false">        
+        <label align="top" fontSize="12" text="DESCRIÇÃO" horzTextAlign="center" wordWrap="true" textTrimming="none" autoSize="true"/>
+        <textEditor align="client" field="descricao" fontSize="15"/>
+    </popup>
+
+    <scrollBox align="client">
+        <layout g="container" g-cnt-gutter="20" g-cnt-line-spacing="20" margins="{top=20, bottom=20}">
+            <!-- Habilidades e Perícias -->
+            <layout g="row" g-auto-height="true" g-cnt-horz-align="center" g-cnt-vert-align="center" g-cnt-line-spacing="20">
+                <rectangle g="col" g-auto-height="true" g-width="12" g-width-sm="6" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="HABILIDADES" g="col" g-width="8" g-width-sm="9" g-min-height="40" horzTextAlign="leading" fontSize="15" fontStyle="bold"/>
+                    <button text="Nova" onClick="self.rclHabilidades:append();" g="col" g-width="4" g-width-sm="3" g-vert-tile="true"/>
+                    <gridRecordList name="rclHabilidades" field="habilidades" templateForm="frmHabilidade" g="col" g-width="12" g-width-sm="12" minQt="2"/>
+                </rectangle>
+
+                <rectangle g="col" g-auto-height="true" g-width="12" g-width-sm="6" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="PERÍCIAS" g="col" g-width="8" g-width-sm="9" g-min-height="40" horzTextAlign="leading" fontSize="15" fontStyle="bold"/>
+                    <button text="Nova" onClick="self.rclPericias:append();" g="col" g-width="4" g-width-sm="3" g-vert-tile="true"/>
+                    <layout g="row" g-cnt-gutter="5" g-cnt-horz-align="center" g-cnt-vert-align="center" g-max-height="15">
+                        <layout g="col" g-width="10" g-width-md="11" ></layout>
+                        <label text="I" g="block" width="22" height="10" horzTextAlign="center" fontSize="16"/>
+                        <label text="T" g="block" width="22" height="10" horzTextAlign="center" fontSize="16"/>
+                        <label text="E" g="block" width="22" height="10" horzTextAlign="center" fontSize="16"/>
+                        <label text="EX" g="block" width="22" height="10" horzTextAlign="center" fontSize="16"/>
+                        <layout g="col" g-width="2" g-width-md="1" ></layout>
+                    </layout>
+                    <gridRecordList name="rclPericias" field="pericias" templateForm="frmPericia" g="col" g-width="12" g-width-sm="12" minQt="2"/>
+                </rectangle>
+            </layout>
+
+            <!-- Cifras/Artefatos e Equipamentos -->
+            <layout g="row" g-auto-height="true" g-cnt-horz-align="center" g-cnt-vert-align="center" g-cnt-line-spacing="20">
+                <rectangle g="col" g-auto-height="true" g-width="12" g-width-sm="6" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="CIFRAS/ARTEFATOS" g="col" g-width="8" g-width-sm="9" g-min-height="40" horzTextAlign="leading" fontSize="15" fontStyle="bold"/>
+                    <button text="Novo" onClick="self.rclCifras:append();" g="col" g-width="4" g-width-sm="3" g-vert-tile="true"/>
+                    <gridRecordList name="rclCifras" field="cifrasArtefatos" templateForm="frmCifraArtefato" g="col" g-width="12" g-width-sm="12" minQt="2"/>
+                </rectangle>
+
+                <rectangle g="col" g-auto-height="true" g-width="12" g-width-sm="6" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="EQUIPAMENTOS" g="col" g-width="12" g-min-height="40" horzTextAlign="leading" fontSize="15" fontStyle="bold"/>
+                    <richEdit g="col" g-width="12" height="240" g-width-sm="12" field="anotacoesPrincipais" defaultFontColor="white" defaultFontSize="14" backgroundColor="#181716" showToolbar="false"/>
+                </rectangle>
+            </layout>
+        </layout>
+    </scrollBox>
+</form>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmCifraArtefato" height="30" margins="{top=2,bottom=2}">
+	
+	<layout g="container" g-cnt-line-spacing="5" g-cnt-gutter="5" g-cnt-horz-align="left" g-cnt-vert-align="center">
+		<!-- INÍCIO: SCRIPT PARA PEGAR O POPUP -->
+		<script> 
+			<![CDATA[			
+			local function askForDelete()
+				Dialogs.confirmYesNo("Deseja realmente apagar '" .. (sheet.nomeCifra or "<sem nome>").. "'?'",
+									 function (confirmado)
+										if confirmado then
+											NDB.deleteNode(self.sheet);
+										end;
+									 end);
+			end;
+			
+			local function showMagiaPopup()
+				local pop = self:findControlByName("popHabilidade");
+				local popControle = self:findControlByName("buttonHabilityInfo");
+				
+				if pop ~= nil then
+					pop:setNodeObject(self.sheet);
+					pop:show("rightCenter", popControle);
+				else
+					showMessage("Não foi encontrada a janela de descrição correspondente.");
+				end;
+			end;			
+			]]>
+		</script>
+		<!-- FIM: SCRIPT PARA PEGAR O POPUP -->
+	
+		<!-- INÍCIO: NOME, TIPO E ROLAGEM -->
+		<edit g="col" g-width="10" field="nomeHabilidade" fontSize="18"/>			
+		<button g="col" g-width="1" name="buttonHabilityInfo" text="?" g-vert-tile="true" onClick="showMagiaPopup();"/>
+		<button g="col" g-width="1" text="X" g-vert-tile="true" onClick="askForDelete();"/>
+		<!-- FIM: NOME, TIPO E ROLAGEM -->
+	</layout>
+</form>

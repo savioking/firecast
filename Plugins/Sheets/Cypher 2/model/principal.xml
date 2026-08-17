@@ -7,7 +7,7 @@
         <button name="configBtn" left="5" top="5" width="25" height="25" cursor="handPoint" opacity="0.0">
             <event name="onClick">
                 local pop = self:findControlByName("popConfig");
-                local popConfig = self:findControlByName("trocarConfig");
+                local popConfig = self:findControlByName("configBtn");
                 
                 if pop ~= nil then
                     pop:setNodeObject(self.sheet);
@@ -18,7 +18,60 @@
             </event>
         </button>
 
-        <layout g="container" g-cnt-gutter="20" g-cnt-line-spacing="20">
+        <popup name="popConfig" width="375" height="360" backOpacity="0.4" autoScopeNode="true">			
+            <flowLayout align="top" autoHeight="true" maxControlsPerLine="2" margins="{bottom=4}" horzAlign="center">						
+                <comboBox align="top" items="{'Padrão', 'Numenera 1', 'Numenera 2', 'Fantasia 1', 'Fantasia 2', 'Steampunk 1', 'Steampunk 2',
+                'Cyberpunk 1', 'Cyberpunk 2', 'Contemporâneo 1', 'Contemporâneo 2'}"
+                
+                values="{'default', 'numenera1', 'numenera2', 'fantasy1', 'fantasy2', 'steampunk1', 'steampunk2',
+                'cyberpunk1', 'cyberpunk2', 'contemporaneo1', 'contemporaneo2'}"
+
+                field="fundoPreviewCombobox" value="default" width="200" height="30"/>
+                
+                <image name="fundoPreview" width="320" height="180" align="top" style="autoFit" margins="{top=10}"/>
+                <label align="top" text="URL Customizada:" width="200" height="30" horzTextAlign="center"/>
+                
+                <edit align="top" field="fundoPreviewURLCustomizada" width="200" height="30"/>
+                
+                <!-- APLICA A IMAGEM ESCOLHIDA/URL -->
+                <button align="top" text="Aplicar" width="200" height="30" margins="{top=10}">
+                    <event name="onClick">
+                        if sheet.fundoPreviewCombobox ~= nil and sheet.fundoPreviewCombobox ~= "" then
+                            self.bgImg.src = self.fundoPreview.src;
+                            self.bgImgHab.src = self.fundoPreview.src;
+                            self.bgImgDet.src = self.fundoPreview.src;
+
+                            sheet.bgCustomURL = self.fundoPreview.src;
+                        end;
+                    
+                        self.popConfig:close();
+                    </event>
+                </button>
+                
+                <button align="top" text="Aplicar URL" width="200" height="30">
+                    <event name="onClick">
+                        if sheet.fundoPreviewURLCustomizada ~= nil and sheet.fundoPreviewURLCustomizada ~= "" then
+                            self.bgImg.src = sheet.fundoPreviewURLCustomizada;
+                            self.bgImgHab.src = sheet.fundoPreviewURLCustomizada;
+                            self.bgImgDet.src = sheet.fundoPreviewURLCustomizada;
+
+                            sheet.bgCustomURL = sheet.fundoPreviewURLCustomizada;
+                        end;
+                    
+                        self.popConfig:close();
+                    </event>
+                </button>
+                
+                <!-- MUDA A IMAGEM DO PREVIEW -->
+                <dataLink field="fundoPreviewCombobox">
+                    <event name="onChange">
+                        self.fundoPreview.src = "/assets/bg/" .. (sheet.fundoPreviewCombobox or "default") .. ".jpg";
+                    </event>
+                </dataLink>
+            </flowLayout>
+        </popup>
+
+        <layout g="container" g-cnt-gutter="20" g-cnt-line-spacing="20" margins="{top=20, bottom=20}">
             
             <!-- HEADER: FRASE DO PERSONAGEM, TIER, XP, ESFORÇO & JOGADOR -->
             <layout g="row" g-auto-height="true" g-cnt-horz-align="center" g-cnt-vert-align="center">
@@ -210,6 +263,33 @@
                             </layout>
                         </rectangle>
 
+                        <!-- AVANÇOS (g-width="12" g-width-sm="6") -->
+                        <rectangle g="col" g-width="12" g-width-sm="6" g-auto-height="true" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" padding="{left = 12, right = 12, top = 8, bottom = 20}" strokeColor="white" strokeSize="2" g-cnt-line-spacing="10">
+                            <label text="AVANÇOS" g="row" g-min-height="40" horzTextAlign="center" fontSize="15" fontStyle="bold"/>
+
+                            <layout g="row" g-min-height="1" />
+
+                            <!-- Descansos Checkboxes -->
+                            <layout g="row" g-auto-height="true" g-cnt-gutter="5" g-cnt-line-spacing="10" g-cnt-horz-align="center">
+                                <layout g="col" g-width="5" g-auto-height="true">
+                                    <imageCheckBox field="rec1Action" g="block" width="20" height="20" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png"/>
+                                    <label text="+4 nas Reservas" g="col" g-width="12" height="20" fontSize="12"/>
+                                </layout>
+                                <layout g="col" g-width="5" g-auto-height="true">
+                                    <imageCheckBox field="rec10Min" g="block" width="20" height="20" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png"/>
+                                    <label text="+1 Perícia" g="col" g-width="12" height="20" fontSize="12"/>
+                                </layout>
+                                <layout g="col" g-width="5" g-auto-height="true">
+                                    <imageCheckBox field="rec1Hour" g="block" width="20" height="20" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png"/>
+                                    <label text="+1 de Esforço" g="col" g-width="12" height="20" fontSize="12"/>
+                                </layout>
+                                <layout g="col" g-width="5" g-auto-height="true">
+                                    <imageCheckBox field="rec10Hrs" g="block" width="20" height="20" checkedImage="/assets/components/checkbox1_checked.png" uncheckedImage="/assets/components/checkbox1_unchecked.png"/>
+                                    <label text="+1 em Edge" g="col" g-width="12" height="20" fontSize="12"/>
+                                </layout>
+                            </layout>
+                        </rectangle>
+
                     </layout>
 
                 </layout>
@@ -225,7 +305,7 @@
                     <!-- ANOTAÇÕES RÁPIDAS -->
                     <rectangle g="row" g-min-height="300" g-vert-tile="true" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" padding="{left = 12, right = 12, top = 10, bottom = 10}" strokeColor="white" strokeSize="2">
                         <label text="ANOTAÇÕES RÁPIDAS" align="top" height="25" horzTextAlign="center" fontSize="16" fontStyle="bold"/>
-                        <textEditor align="client" field="anotacoesPrincipais" transparent="true" fontColor="#ffffff" fontSize="14"/>
+                        <richEdit align="client" field="anotacoesPrincipais" defaultFontColor="white" defaultFontSize="14" backgroundColor="#181716" showToolbar="false"/>
                     </rectangle>
 
                 </layout>

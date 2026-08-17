@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmDetalhes" align="client" theme="dark">
+    <image name="bgImgDet" align="client" style="autoFit"/>
+
+    <scrollBox align="client">
+        <layout g="container" g-cnt-gutter="20" g-cnt-line-spacing="20" margins="{top=20, bottom=20}">
+            
+            <layout g="col" g-width="12" g-width-md="6" g-auto-height="true" g-cnt-horz-align="center" g-cnt-vert-align="center" g-cnt-line-spacing="20">
+                <rectangle g="col" g-auto-height="true" g-width="12" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="APARÊNCIA" g="col" g-width="12" g-min-height="40" horzTextAlign="center" fontSize="15" fontStyle="bold"/>
+                    <richEdit g="col" g-width="12" height="160" g-width-sm="12" field="detAparencia" defaultFontColor="white" defaultFontSize="14" backgroundColor="#181716" showToolbar="false"/>
+                </rectangle>
+
+                <rectangle g="col" g-auto-height="true" g-width="12" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="ORIGENS" g="col" g-width="12" g-min-height="40" horzTextAlign="center" fontSize="15" fontStyle="bold"/>
+                    <richEdit g="col" g-width="12" height="160" g-width-sm="12" field="detOrigens" defaultFontColor="white" defaultFontSize="14" backgroundColor="#181716" showToolbar="false"/>
+                </rectangle>
+
+                <rectangle g="col" g-auto-height="true" g-width="12" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="CONEXÔES" g="col" g-width="12" g-min-height="40" horzTextAlign="center" fontSize="15" fontStyle="bold"/>
+                    <richEdit g="col" g-width="12" height="160" g-width-sm="12" field="detConexoes" defaultFontColor="white" defaultFontSize="14" backgroundColor="#181716" showToolbar="false"/>
+                </rectangle>
+
+
+
+
+            </layout>
+
+            <!-- Cifras/Artefatos e Equipamentos -->
+            <layout g="col" g-width="12" g-width-md="6" g-auto-height="true" g-cnt-horz-align="center" g-cnt-vert-align="center" g-cnt-line-spacing="20">
+                <rectangle g="col" g-auto-height="true" g-width="12" color="#211f1e" cornerType="bevel" xradius="20" yradius="25" g-cnt-line-spacing="10" padding="{left = 20, right = 20, top = 10, bottom = 10}" strokeColor="white" strokeSize="2" g-min-height="100" g-cnt-vert-align="top">
+                    <label text="HISTÓRIA" g="col" g-width="12" g-min-height="40" horzTextAlign="center" fontSize="15" fontStyle="bold"/>
+                    <richEdit g="col" g-width="12" height="660" g-width-sm="12" field="detHistoria" defaultFontColor="white" defaultFontSize="14" backgroundColor="#181716" showToolbar="true"/>
+                </rectangle>
+            </layout>
+        </layout>
+    </scrollBox>
+</form>

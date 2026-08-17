@@ -4,23 +4,27 @@
         <tab title="Principal">
             <import file="principal.xml"/>
         </tab>
-        <!-- <tab title="Habilidades">
-            <import file="habilidades.xml"/>
-        </tab> -->
-        <!-- <tab title="História">
-            <import file="história.xml"/>
-        </tab> -->
+        <tab title="Hab &amp; Equip">
+            <import file="hab_equip.xml"/>
+        </tab>
+        <tab title="Detalhes">
+            <import file="detalhes.xml"/>
+        </tab>
         <tab title="Anotações">
             <richEdit align="client" defaultFontColor="white" defaultFontSize="17" backgroundColor="dimgray" field="anotacoes"/>
         </tab>
     </tabControl>
-    <event name="onNodeReady">        
+    <event name="onNodeReady">
+        showMessage(bgCustomURL)
         if sheet.bgCustomURL ~= nil then
             self.bgImg.src = sheet.bgCustomURL;
+            self.bgImgHab.src = sheet.bgCustomURL;
+            self.bgImgDet.src = sheet.bgCustomURL;
             
         else
-            self.bgImg.src = "../assets/bg/desert.jpg";
-            
+            self.bgImg.src = "../assets/bg/default.jpg";
+            self.bgImgHab.src = "../assets/bg/default.jpg";
+            self.bgImgDet.src = "../assets/bg/default.jpg";
         end;
     </event>
 </form>
